@@ -254,7 +254,16 @@ def CariTranskripMhs(S: SetTranskrip, nim: str) -> Transkrip:
 #    SetTranskrip S }
 # REALISASI
 def TopIPK(S: SetTranskrip) -> Mhs:
-    return
+    if IsEmpty(S):
+        return []
+    else:
+        if IsEmpty(Tail(S)):
+            return GetMhs(FirstElmt(S))
+        else:
+            if IPKTranskrip(FirstElmt(S)) >= IPKTranskrip(FirstElmt(Tail(S))):
+                return TopIPK([FirstElmt(S)] + Tail(Tail(S)))
+            else:
+                return TopIPK(Tail(S))
 
 # CountMhsPernahMengulang: SetTranskrip → integer
 #   {CountMhsPernahMengulang(S) menghitung jumlah mahasiswa yang
