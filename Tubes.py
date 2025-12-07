@@ -1,4 +1,4 @@
-# **************************************************************
+# *************************************************************************************************
 '''
 Program   : SISTEM INFORMASI AKADEMIK MAHASISWA
 Deskripsi : Program ini merupakan sistem manajemen data akademik mahasiswa yang mengimplementasikan
@@ -12,7 +12,7 @@ Anggota   : 1. Bagus Jatmiko           - (24060125140229)
             5. Wilyan Purbo Buwono     - (24060125130068)
 Tanggal   : 13/12/2025
 '''
-# **************************************************************
+# *************************************************************************************************
 # DEFINISI DAN SPESIFIKASI TYPE
 '''
 type Mhs: <nim: string, nama: string>
@@ -27,13 +27,13 @@ type Transkrip: <Mhs, list of Matkul>
 type SetTranskrip: <Mhs, list of Matkul>
     {<Mhs, list of Matkul> adalah sebuah SetTranskrip dengan list kosong}
 '''
-# **************************************************************
+# *************************************************************************************************
 # REALISASI TYPE
 type Mhs = tuple[str,str]
 type Matkul = tuple[str,int,list]
 type Transkrip = tuple[Mhs,list]
 type SetTranskrip = tuple[list]
-# **************************************************************
+# *************************************************************************************************
 # DEFINISI DAN SPESIFIKASI FUNGSI KONSTRUKTOR
 '''
 MakeMhs: 2 string -> Mhs
@@ -43,13 +43,13 @@ MakeMatkul: string, integer, list of real -> Matkul
     {MakeMatkul(nama, sks, listNilai) membuat objek Matkul dengan nama mata kuliah nama, jumlah SKS sks,
      dan list nilai listNilai}
 
-MakeTranskrip: <Mhs, list of Matkul> → Transkrip
+MakeTranskrip: <Mhs, list of Matkul> -> Transkrip
      {MakeTranskrip(M, listMK) membuat objek Transkrip dengan data mahasiswa M dan list mata kuliah listMK}
 
-MakeSetTranskrip: → SetTranskrip
+MakeSetTranskrip: -> SetTranskrip
     {MakeSetTranskrip() membuat SetTranskrip kosong (list kosong)}
 '''
-# **************************************************************
+# *************************************************************************************************
 # REALISASI FUNGSI KONSTRUKTOR
 def MakeMhs(nim: str, nama: str) -> Mhs:
     return [nim, nama]
@@ -62,7 +62,7 @@ def MakeTranskrip(M: Mhs, listMK: list) -> Transkrip:
 
 def MakeSetTranskrip() -> SetTranskrip:
     return []
-# **************************************************************
+# *************************************************************************************************
 # APLIKASI FUNGSI KONSTRUKTOR
 M1 = MakeMhs("A11.01", "Reno") # -> Membuat objek Mhs
 MK1 = MakeMatkul("Daspro", 3, [2.0, 3.0]) # -> Membuat objek Matkul
@@ -80,7 +80,7 @@ MK6 = MakeMatkul("Kalkulus", 4, [3.0])
 T3 = MakeTranskrip(M3, [MK5, MK6])
 
 S1 = MakeSetTranskrip() # -> Membuat objek Set Transkrip
-# **************************************************************
+# *************************************************************************************************
 # DEFINISI DAN SPESIFIKASI FUNGSI SELEKTOR
 '''
 GetNIM: Mhs -> string
@@ -98,13 +98,13 @@ GetSKS: Matkul -> integer
 GetNilai: Matkul -> list of real
     {GetNilai(MK) mengambil list nilai dari MK}
 
-GetMhs: Transkrip → Mhs
+GetMhs: Transkrip -> Mhs
     {GetMhs(T) mengambil data mahasiswa dari transkrip T}
 
-GetListMatkul: Transkrip → list of Matkul
+GetListMatkul: Transkrip -> list of Matkul
     {GetListMatkul(T) mengambil list mata kuliah dari transkrip T}
 '''
-# **************************************************************
+# *************************************************************************************************
 # REALISASI FUNGSI SELEKTOR
 def GetNIM(M: Mhs) -> str:
     return M[0]
@@ -126,7 +126,7 @@ def GetMhs(T: Transkrip) -> Mhs:
 
 def GetListMatkul(T: Transkrip) -> list:
     return T[1]
-# **************************************************************
+# *************************************************************************************************
 # APLIKASI FUNGSI SELEKTOR
 print("NIM Mahasiswa: " + GetNIM(M1)) # -> "A11.2020.01234"
 print("Nama Mahasiswa: " + GetNama(M1)) # -> "Reno"
@@ -135,7 +135,7 @@ print("SKS " + GetNamaMK(MK1) + ": " + str(GetSKS(MK1))) # -> 3
 print("Nilai " + GetNamaMK(MK1) + ": " + str(GetNilai(MK1))) # -> [2.0, 3.0]
 print("Data Mhs: " + str(GetMhs(T1))) # -> M (objek Mahasiswa)
 print("Matkul dan Nilai Mhs: " + str(GetListMatkul(T1))) # -> [MK1, MK2]
-# **************************************************************
+# *************************************************************************************************
 # DEFINISI DAN SPESIFIKASI FUNGSI ANTARA
 '''
 {Fungsi antara dasar untuk implementasi list terletak pada file list_operators.py. Fungsi di dalam file list_operators.py
@@ -159,7 +159,7 @@ CountMengulangMKPadaSet: SetTranskrip, string -> integer
      mata kuliah dengan nama tertentu. Sebuah mata kuliah dianggap diulang jika memiliki lebih dari satu nilai
      dalam list nilainya.}
 '''
-# **************************************************************
+# *************************************************************************************************
 # REALISASI FUNGSI ANTARA
 from list_operators import *
 
@@ -206,66 +206,66 @@ def CountMengulangMKPadaSet(S, namaMK):
                 return 1 + CountMengulangMKPadaSet(Tail(S), namaMK)
             else:
                 return CountMengulangMKPadaSet(Tail(S), namaMK)
-# **************************************************************
+# *************************************************************************************************
 # DEFINISI DAN SPESIFIKASI OPERATOR
 '''
-NilaiSekarangMK: Matkul → real
-    {NilaiSekarangMK(MK) mengambil nilai akhir dari MK. Jika list kosong → −1.0. Jika tidak → elemen terakhir}
+NilaiSekarangMK: Matkul -> real
+    {NilaiSekarangMK(MK) mengambil nilai akhir dari MK. Jika list kosong -> −1.0. Jika tidak -> elemen terakhir}
 
-SudahAmbilMK: Matkul → boolean
+SudahAmbilMK: Matkul -> boolean
     {SudahAmbilMK(MK) mengembalikan True jika list nilai MK tidak kosong}
 
-MengulangMK: Matkul → boolean
+MengulangMK: Matkul -> boolean
     {MengulangMK(MK) mengembalikan True jika panjang list nilai MK > 1}
 
-LulusMK: Matkul → boolean
+LulusMK: Matkul -> boolean
     {LulusMK(MK) mengembalikan True jika nilai akhir MK ≥ 2.0}
 
-CariMatkul: <Transkrip, string> → Matkul
+CariMatkul: <Transkrip, string> -> Matkul
     {CariMatkul(T, namaMK) mencari dan mengambil Matkul dari transkrip T berdasarkan nama mata kuliah namaMK}
 
-TotalSKSLulus: Transkrip → integer
+TotalSKSLulus: Transkrip -> integer
     {TotalSKSLulus(T) menjumlahkan seluruh SKS dari mata kuliah yang lulus(nilai ≥ 2.0) pada transkrip T}
 
-JumlahMatkulMengulang: Transkrip → integer
+JumlahMatkulMengulang: Transkrip -> integer
     {JumlahMatkulMengulang(T) menghitung jumlah mata kuliah yang diulang (panjang list nilai > 1) pada transkrip T}
 
-IPKTranskrip: Transkrip → real
+IPKTranskrip: Transkrip -> real
     {IPKTranskrip(T) menghitung IPK dari transkrip T dengan rumus: (total NilaiAkhir × SKS)/total SKS}
 
-AddTranskrip: <SetTranskrip, Transkrip> → SetTranskrip
+AddTranskrip: <SetTranskrip, Transkrip> -> SetTranskrip
     {AddTranskrip(S, T) menambahkan transkrip T ke akhir SetTranskrip S jika NIM mahasiswa pada T belum ada di S.
      jika sudah ada, tidak ditambahkan}
 
-AddNilaiMatkul: <SetTranskrip, string, string, real> → SetTranskrip
+AddNilaiMatkul: <SetTranskrip, string, string, real> -> SetTranskrip
     {AddNilaiMatkul(S, nim, namaMK, nilai) menambahkan nilai baru nilai ke mata kuliah namaMK pada transkrip
      mahasiswa dengan NIM nim di SetTranskrip S}
 
-CariTranskripMhs: <SetTranskrip, string> → Transkrip
+CariTranskripMhs: <SetTranskrip, string> -> Transkrip
   {CariTranskripMhs(S, nim) mencari dan mengembalikan transkrip pertama
    dengan NIM nim dari SetTranskrip S}
 
-TopIPK: SetTranskrip → Mhs
+TopIPK: SetTranskrip -> Mhs
   {TopIPK(S) menghasilkan mahasiswa dengan IPK tertinggi dari
    SetTranskrip S }
 
-CountMhsPernahMengulang: SetTranskrip → integer
+CountMhsPernahMengulang: SetTranskrip -> integer
   {CountMhsPernahMengulang(S) menghitung jumlah mahasiswa yang
    pernah mengulang minimal 1 mata kuliah pada SetTranskrip S}
 
-CountMhsLulusSemuaMatkul: SetTranskrip → integer
+CountMhsLulusSemuaMatkul: SetTranskrip -> integer
   {CountMhsLulusSemuaMatkul(S) menghitung jumlah mahasiswa yang
    lulus seluruh mata kuliah yang diambil pada SetTranskrip S}
 
-MatkulPalingSeringDiulang: SetTranskrip → string
+MatkulPalingSeringDiulang: SetTranskrip -> string
   {MatkulPalingSeringDiulang(S) menghasilkan nama mata kuliah yang
    paling sering diulang (frekuensi tertinggi) pada SetTranskrip S}
 
-CountMhsDenganIPKRentang: <SetTranskrip, real, real> → integer
+CountMhsDenganIPKRentang: <SetTranskrip, real, real> -> integer
   {CountMhsDenganIPKRentang(S, a, b) menghitung jumlah mahasiswa
    dengan IPK dalam rentang [a, b] pada SetTranskrip S}
 '''
-# **************************************************************
+# *************************************************************************************************
 # REALISASI OPERATOR
 def NilaiSekarangMK(MK: Matkul) -> float:
     if IsEmpty(GetNilai(MK)):
@@ -393,7 +393,7 @@ def CountMhsDenganIPKRentang(S: SetTranskrip, a: float, b: float) -> int:
             return 1 + CountMhsDenganIPKRentang(Tail(S), a, b)
         else:
             return CountMhsDenganIPKRentang(Tail(S), a, b)
-# **************************************************************
+# *************************************************************************************************
 # APLIKASI OPERATOR
 print("Nilai " + GetNamaMK(MK1) + " Sekarang: " + str(NilaiSekarangMK(MK1))) # -> 3.0
 print("Nilai " + GetNamaMK(MK2) + " Sekarang: " + str(NilaiSekarangMK(MK2))) # -> -1.0
@@ -428,4 +428,4 @@ print("Banyak Mhs yang Mengulang: " + str(CountMhsPernahMengulang(S7)))
 print("Banyak Mhs yang Lulus: " + str(CountMhsLulusSemuaMatkul(S7)))
 print("Top Matkul Diulang: " + str(MatkulPalingSeringDiulang(S7)))
 print("Mhs dengan Rentang IPK 2.0-3.0: "+ str(CountMhsDenganIPKRentang(S7, 2.0, 3.0)))
-# **************************************************************
+# *************************************************************************************************
