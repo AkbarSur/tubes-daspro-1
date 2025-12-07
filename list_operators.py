@@ -1,3 +1,32 @@
+# **************************************************************
+# DEFINISI DAN SPESIFIKASI FUNGSI ANTARA
+'''
+Konso : elemen, List → List
+    {Konso(e,L): menghasilkan sebuah list dari e dan L, dengan e sebagai elemen pertama e: e o L → L'} 
+
+Konsi : List, elemen → List
+    {Konsi(L,e): menghasilkan sebuah list dari L dan e, dengan e sebagai elemen terakhir list : L • e → L'} 
+
+FirstElmt: List tidak kosong → elemen
+    {FirstElmt(L) Menghasilkan elemen pertama list L} 
+
+Tail : List tidak kosong → List
+    {Tail(L) : Menghasilkan list tanpa elemen pertama list L, mungkin kosong}
+
+LastElmt : List tidak kosong → elemen
+    {LastElmt(L) : Menghasilkan elemen terakhir list L}
+
+Head : List tidak kosong → List
+    {Head(L) : Menghasilkan list tanpa elemen terakhir list L, mungkin kosong}  
+
+IsEmpty : List → boolean
+    {IsEmpty(L) benar jika list kosong}
+
+NbElmt : List → integer
+    {NbElmt(L) : Menghasilkan banyaknya elemen list, nol jika kosong} 
+'''
+# **************************************************************
+# REALISASI
 def Konso(e, L):
     return [e] + L
 
@@ -19,38 +48,9 @@ def Head(L):
 def IsEmpty(L):
     return L == []
 
-def IsOneElmt(L):
-    if IsEmpty(L):
-        return False
-    else:
-        return Tail(L) == [] and Head(L) == []
-    
-def IsMember(X, L):
-    if IsEmpty(L):
-        return False
-    else:
-        return IsMember(X, Tail(L)) or X == FirstElmt(L)
-
-def IsEqual(L1, L2):
-    if IsEmpty(L1) and IsEmpty(L2):
-        return True
-    elif IsEmpty(L1):
-        return False
-    elif IsEmpty(L2):
-        return False
-    elif FirstElmt(L1) == FirstElmt(L2):
-        return IsEqual(Tail(L1), Tail(L2))
-    else:
-        return False
-
 def NbElmt(L):
     if IsEmpty(L):
         return 0
     else:
         return 1 + NbElmt(Tail(L))
     
-def sumelmt(L):
-    if IsEmpty(L):
-        return 0
-    else:
-        return FirstElmt(L) + sumelmt(Tail(L)) 
